@@ -1,24 +1,12 @@
-const express = require("./app");
-const app = express();
+require("dotenv").config();
+const app = require("./src/app");
 
-const port = 5000;
-
-const welcome = (req, res) => {
-    res.send("Welcome to Express");
-};
-
-app.get("/", welcome);
-
-const welcomeName = (req, res) => {
-    res.send(`Welcome ${req.params.name}`);
-};
-
-app.get("/users/:name", welcomeName);
+const port = process.env.APP_PORT;
 
 app
-    .listen(port, () => {
-        console.info(`Server is listening on port ${port}`);
-    })
-    .on("error", (err) => {
-        console.error("Error:", err.message);
-    });
+  .listen(port, () => {
+    console.log(`Server is listening on ${port}`);
+  })
+  .on("error", (err) => {
+    console.error("Error:", err.message);
+  });
